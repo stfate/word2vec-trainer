@@ -1,15 +1,15 @@
-wikipedia-word2vec-model-builder
+word2vec-trainer
 ================================
 
 # Overview
 
-日本語Wikipediaダンプデータからgensim word2vecモデルの学習&word embeddingの計算を行うツールキット．
+gensim word2vecモデルの学習を行うツールキット．
 
 # Requirements
 
 - cURL
 - MeCab == 0.996
-- Python >= 3.4
+- Python >= 3.6
 
 # Setup
 
@@ -21,24 +21,24 @@ pip install -r requirements.txt
 
 # Run
 
-## Training
+## Wikipedia
 
 WikipediaダンプファイルのDL & NEologd辞書ファイルDL & モデル学習 を行う．
 
 ```bash
-./train --download-wikipedia-dump --download-neologd --build-gensim-model
+python src/train_wikipedia.py --download-wikipedia-dump --download-neologd --build-model
 ```
 
 モデルのハイパーパラメータを指定する．
 
 ```bash
-./train --build-gensim-model --size=100 --window=8 --min-count=5
+python src/train_wikipedia.py --build-model --size=100 --window=8 --min-count=5
 ```
 
-## Embedding extraction
+## General corpus
 
 ```bash
-./featext --model-path=path/to/model --dictionary-path=path/to/dictionary --output-directory=path/to/output
+python src/train_text_corpus.py --build-model --corpus-path=CORPUS_PATH --size=100 --window=8 --min-count=5
 ```
 
 # How to use model

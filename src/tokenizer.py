@@ -25,7 +25,7 @@ def download_neologd(dic_path):
 
 
 def get_tagger(dic_path):
-    return MeCab.Tagger("-Ochasen -d {}".format(dic_path))
+    return MeCab.Tagger(f"-Ochasen -d {dic_path}")
 
 def concat_continuous_numbers(tokens):
     prev_token = ""
@@ -42,11 +42,14 @@ def concat_continuous_numbers(tokens):
 
 def tokenize(text, tagger):
     tokens = []
-    for line in tagger.parse(text).split('\n'):
-        if line == "EOS":
-            break
-        surface = line.split('\t')[0]
-        tokens.append(surface)
+    parsed_text = tagger.parse(text)
+    if parsed_text is not None:
+        for line in parsed_text.split('\n'):
+            if line == "EOS":
+                break
+            surface = line.split('\t')[0]
+            tokens.append(surface)
 
-    tokens_mod = concat_continuous_numbers(tokens)
-    return tokens_mod
+        tokens = concat_continuous_numbers(tokens)
+    
+    return tokens
