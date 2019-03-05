@@ -26,6 +26,9 @@ def get_options():
     parser.add_argument("--download-neologd", action="store_true", default=False)
     parser.add_argument("--dictionary-path", default="output/dic")
 
+    parser.add_argument("--use-pretrained-model", action="store_true", default=False)
+    parser.add_argument("--pretrained-model-path", default="model/pretrained.word2vec.gensim.model")
+
     args = parser.parse_args()
     return vars(args)
 
@@ -55,9 +58,10 @@ if __name__ == "__main__":
     size = options["size"]
     window = options["window"]
     min_count = options["min_count"]
+    use_pretrained_model = options["use_pretrained_model"]
+    pretrained_model_path = options["pretrained_model_path"]
     if options["build_model"]:
         with tempfile.TemporaryDirectory() as temp_dir:
             iter_docs = partial(wikipedia.iter_docs, wikipedia_dump_path, temp_dir)
             tagger = tokenizer.get_tagger(dic_path)
-            # iter_tokens = get_tokens_iterator(tokenizer.get_tagger(dic_path), iter_docs)
-            word2vec_trainer.train_word2vec_model(output_model_path, iter_docs, tagger, size, window, min_count)
+            word2vec_trainer.train_word2vec_model(output_model_path, iter_docs, tagger, size, window, min_count, use_pretrained_model, pretrained_model_path)
