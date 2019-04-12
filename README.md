@@ -35,11 +35,15 @@ python src/train_wikipedia.py --download-wikipedia-dump --download-neologd --bui
 python src/train_wikipedia.py --build-model --size=100 --window=8 --min-count=5
 ```
 
-## General corpus
+パラメータ指定方法の詳細は`train_wikipedia.sh`を参照されたい．
+
+## General dataset
 
 ```bash
-python src/train_text_corpus.py --build-model --corpus-path=CORPUS_PATH --size=100 --window=8 --min-count=5
+python src/train_text_dataset.py --build-model --corpus-path=CORPUS_PATH --size=100 --window=8 --min-count=5
 ```
+
+パラメータ指定方法の詳細は`train_text_dataset.sh`を参照されたい．
 
 # How to use model
 

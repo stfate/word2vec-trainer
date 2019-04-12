@@ -8,3 +8,4 @@ requests
 scipy
 six
 smart-open
+nltk
