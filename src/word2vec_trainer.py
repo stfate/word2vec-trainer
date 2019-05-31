@@ -1,15 +1,19 @@
-from gensim.models.word2vec import Word2Vec
 import functools
 from pathlib import Path
 import multiprocessing
 import logging
+
+from gensim.models.word2vec import Word2Vec
+
+
 logging.basicConfig(level=logging.INFO)
 
 
 def count_generator(iter):
     return sum(1 for _ in iter)
 
-def train_word2vec_model(output_model_path, iter_docs, tokenizer, size, window, min_count, use_pretrained_model=False, pretrained_model_path=None):
+
+def train_word2vec_model(output_model_path, iter_docs, tokenizer, size=300, window=8, min_count=5, sg=1, epoch=5, use_pretrained_model=False, pretrained_model_path=None):
     """
     Parameters
     ----------
@@ -33,14 +37,15 @@ def train_word2vec_model(output_model_path, iter_docs, tokenizer, size, window, 
             size=size,
             window=window,
             min_count=min_count,
-            sg=1,
+            sg=sg,
             workers=multiprocessing.cpu_count()
         )
         model.build_vocab(iter_tokens(), update=False)
     
     logging.info("train word2vec")
 
-    model.train(iter_tokens(), total_examples=n_obs, epochs=model.iter)
+    print("iter=", model.iter)
+    model.train(iter_tokens(), total_examples=n_obs, epochs=epoch)
     model.init_sims(replace=True)
 
     logging.info("save model")
