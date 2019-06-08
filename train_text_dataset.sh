@@ -12,10 +12,7 @@ SIZE=300
 WINDOW=8
 MIN_COUNT=1
 SG=1
-EPOCH=5
+EPOCH=1
 
-# download mecab-ipadic-neologd
-# python src/train_text_dataset.py --download-neologd --dictionary-path=$DIC_PATH
-
-# python src/train_text_dataset.py --build-model -o $OUTPUT_PATH --dictionary-path=$DIC_PATH --dataset-path=$DATASET_PATH --lang=$LANG --size=$SIZE --window=$WINDOW --min-count=$MIN_COUNT --sg=$SG --epoch=$EPOCH --use-pretrained-model --pretrained-model-path=$PRETRAINED_MODEL_PATH
-python src/train_text_dataset.py --build-model -o $OUTPUT_PATH --dictionary-path=$DIC_PATH --dataset-path=$DATASET_PATH --lang=$LANG --size=$SIZE --window=$WINDOW --min-count=$MIN_COUNT --sg=$SG --epoch=$EPOCH
+python src/train_text_dataset.py -o $OUTPUT_PATH --dictionary-path=$DIC_PATH --dataset-path=$DATASET_PATH --lang=$LANG --size=$SIZE --window=$WINDOW --min-count=$MIN_COUNT --sg=$SG --epoch=$EPOCH --use-pretrained-model --pretrained-model-path=$PRETRAINED_MODEL_PATH
+# python src/train_text_dataset.py -o $OUTPUT_PATH --dictionary-path=$DIC_PATH --dataset-path=$DATASET_PATH --lang=$LANG --size=$SIZE --window=$WINDOW --min-count=$MIN_COUNT --sg=$SG --epoch=$EPOCH

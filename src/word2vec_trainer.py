@@ -24,7 +24,7 @@ def train_word2vec_model(output_model_path, iter_docs, tokenizer, size=300, wind
     """
     logging.info("get tokens iterator")
 
-    iter_tokens = tokenizer.get_tokens_iterator(iter_docs)
+    iter_tokens = tokenizer.get_tokens_iterator(iter_docs, normalize=False)
     n_obs = count_generator(iter_tokens())
 
     logging.info("build vocabulary")
@@ -44,7 +44,6 @@ def train_word2vec_model(output_model_path, iter_docs, tokenizer, size=300, wind
     
     logging.info("train word2vec")
 
-    print("iter=", model.iter)
     model.train(iter_tokens(), total_examples=n_obs, epochs=epoch)
     model.init_sims(replace=True)
 

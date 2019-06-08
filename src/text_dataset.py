@@ -56,7 +56,7 @@ class WikipediaDataset(TextDatasetBase):
         extracted_file_path_pattern = os.path.join(dir_path, "*", "*.bz2")
         extracted_file_paths = glob(extracted_file_path_pattern)
         if len(extracted_file_paths) == 0:
-            cmd = [self.__wikiextractor_cmd, "--compress", "--quiet", "-o", dir_path, file_path]
+            cmd = ["python", self.__wikiextractor_cmd, "--compress", "--quiet", "-o", dir_path, file_path]
             subprocess.call(cmd, stdout=sys.stdout)
             extracted_file_paths = glob(extracted_file_path_pattern)
 
@@ -89,10 +89,6 @@ class WikipediaDataset(TextDatasetBase):
                             continue
                         if len(line) > 0:
                             lines.append(line)
-
-    def download_dump(self, file_path, url):
-        cmd = ["curl", "-o", file_path, url]
-        subprocess.call(cmd, stdout=sys.stdout)
 
 
 class MARDDataset(TextDatasetBase):
