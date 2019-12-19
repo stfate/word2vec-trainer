@@ -16,9 +16,21 @@ def train_word2vec_model(output_model_path, iter_docs, tokenizer, size=300, wind
     Parameters
     ----------
     model_path : string
-        Path of Word2Vec model
+        path of Word2Vec model
     iter_docs : iterator
-        Iterator of documents, which are lists of words
+        iterator of documents, which are lists of words
+    tokenizer : subclass of DocumentTokenizerBase
+        word tokenizer
+    size : int
+        size of word vector
+    window : int
+        window size of word2vec
+    min_count : int
+        minimum word count
+    sg : int
+        word2vec training algorithm (1: skip-gram other:CBOW)
+    epoch : int
+        number of epochs
     """
     logging.info("get tokens iterator")
 
