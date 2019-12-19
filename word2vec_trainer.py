@@ -2,23 +2,20 @@ import functools
 from pathlib import Path
 import multiprocessing
 import logging
+import more_itertools
 from gensim.models.word2vec import Word2Vec
 
 logging.basicConfig(level=logging.INFO)
-
-
-def count_generator(iter):
-    return sum(1 for _ in iter)
 
 
 def train_word2vec_model(output_model_path, iter_docs, tokenizer, size=300, window=8, min_count=5, sg=1, epoch=5):
     """
     Parameters
     ----------
-    model_path : string
+    output_model_path : string
         path of Word2Vec model
     iter_docs : iterator
-        iterator of documents, which are lists of words
+        iterator of documents, which are raw texts
     tokenizer : subclass of DocumentTokenizerBase
         word tokenizer
     size : int
@@ -35,7 +32,10 @@ def train_word2vec_model(output_model_path, iter_docs, tokenizer, size=300, wind
     logging.info("get tokens iterator")
 
     iter_tokens = tokenizer.get_tokens_iterator(iter_docs, normalize=False)
-    n_obs = count_generator(iter_tokens())
+
+    logging.info("count number of documents")
+
+    n_obs = more_itertools.ilen(iter_tokens())
 
     logging.info("build vocabulary")
 
@@ -46,7 +46,7 @@ def train_word2vec_model(output_model_path, iter_docs, tokenizer, size=300, wind
         sg=sg,
         workers=multiprocessing.cpu_count()
     )
-    model.build_vocab(iter_tokens(), update=False)
+    model.build_vocab(iter_tokens())
     
     logging.info("train word2vec")
 
