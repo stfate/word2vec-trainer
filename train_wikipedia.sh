@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# WIKIPEDIA_DUMP_PATH=../../dataset/Wikipedia/jawiki-latest-pages-articles.xml.bz2
-WIKIPEDIA_DUMP_PATH=../../dataset/Wikipedia/jawiki-latest-pages-articles1.xml-p1p106175.bz2
+WIKIPEDIA_DUMP_PATH=../../dataset/Wikipedia/jawiki-latest-pages-articles.xml.bz2
+# WIKIPEDIA_DUMP_PATH=../../dataset/Wikipedia/jawiki-latest-pages-articles1.xml-p1p106175.bz2
 LANG=ja
 DIC_PATH=/usr/local/lib/mecab/dic/mecab-ipadic-neologd
 OUTPUT_PATH=model/jawiki-w2v-model/word2vec.gensim.model
