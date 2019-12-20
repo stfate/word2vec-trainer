@@ -5,7 +5,7 @@ import logging
 import more_itertools
 from gensim.models.word2vec import Word2Vec
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.INFO, format="[%(asctime)s] %(levelname)s:%(message)s", datefmt="%Y/%m/%d %H:%M:%S")
 
 
 def train_word2vec_model(output_model_path, iter_docs, tokenizer, size=300, window=8, min_count=5, sg=1, epoch=5):
