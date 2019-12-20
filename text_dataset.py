@@ -55,7 +55,7 @@ class JapaneseText8Dataset(TextDatasetBase):
             sentences = sentence_tokenizer.tokenize(text)
             for i,sentence in enumerate(sentences):
                 sentence = sentence.replace(" ", "")
-                yield {"title": i, "body": self.word_tokenizer.tokenize(sentence)}
+                yield self.word_tokenizer.tokenize(sentence)
 
 
 class WikipediaDataset(TextDatasetBase):
@@ -106,7 +106,7 @@ class WikipediaDataset(TextDatasetBase):
                         m = re_doc_end.match(line)
                         if m is not None:
                             if not does_skip_this_doc:
-                                yield {"title": title, "body": self.word_tokenizer.tokenize("\n".join(lines))}
+                                yield self.word_tokenizer.tokenize("\n".join(lines))
                             is_inside_doc = False
                             does_skip_this_doc = False
                             lines = []
@@ -139,7 +139,7 @@ class ArtistReviewDataset(TextDatasetBase):
             title = meta[fid]
             reader = textio.TextReader(fn)
             lines = reader.read()
-            yield {"title": title, "body": lines}
+            yield self.word_tokenizer.tokenize(lines)
 
 
 class MARDDataset(TextDatasetBase):
@@ -163,4 +163,4 @@ class MARDDataset(TextDatasetBase):
                 review_dict = json.loads(line, encoding="utf-8")
                 title = review_dict["reviewerID"]
                 text = review_dict["reviewText"]
-                yield {"title": title, "body": self.word_tokenizer.tokenize(text)}
+                yield self.word_tokenizer.tokenize(text)
